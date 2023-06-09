@@ -10,9 +10,13 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      taskName: [],
+      taskName: JSON.parse(localStorage.getItem('tasks')) || [],
   };
   }
+  componentDidUpdate= () => {
+    localStorage.setItem('tasks', JSON.stringify(this.state.taskName));
+  }
+
   createTask = (e) => {
       if (e.keyCode === 13) {
       this.setState({ taskName: [...this.state.taskName, e.target.value] });
@@ -21,11 +25,12 @@ class App extends React.Component {
   }
 
   handleClose = (e) => {
-    let taskArray = this.state.taskName
+    let taskArray = JSON.parse(localStorage.getItem('tasks'))
 
     let index = taskArray.indexOf(e.target.title);
     console.log(index, "INDEX of selection")
     taskArray.splice(index, 1)
+    localStorage.setItem('tasks', JSON.stringify(taskArray));
     if (index !== -1) {
       this.setState({
         taskName: taskArray,

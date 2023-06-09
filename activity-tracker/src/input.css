@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-size: 16px;
+}
+
+.selected {
+    background-color: rgb(255, 121, 121);
+}
